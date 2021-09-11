@@ -18,4 +18,6 @@ const firebaseConfig = {
 
 // Initialize Firebase  
 firebase.initializeApp(firebaseConfig);  
-export default firebase.database();  
+export default firebase.database();
+
+--Important Discovery, 11 Sep: Firebase and Firestore are NOT the same thing.  

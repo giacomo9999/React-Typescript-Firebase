@@ -34,11 +34,10 @@ const Fruit = (props: Props) => {
     setFruitState({ ...fruitState, currentFruit: updatedFruit });
   };
 
-  
-
   return (
     <div>
-      <h2>I AM THE FRUIT</h2>
+      <h2>Current Fruit:</h2>
+      <h2>{fruitState.currentFruit.fruitName.toUpperCase()}</h2>
     </div>
   );
 };

@@ -95,10 +95,10 @@ ul {
 
 li {
   font-size: 1.2em;
-  font-weight: 600;
+  /* font-weight: 600; */
   text-align: center;
   margin: 5px;
-  color: #1c2a39;
+  color: #fff;
 }
 
 /* Tables: */

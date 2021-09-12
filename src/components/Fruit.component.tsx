@@ -1,5 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import IFruitData from "../types/fruit.type";
+import FruitDataService from "../services/fruit.service";
 
 type Props = {
   fruit: IFruitData;
@@ -13,7 +14,7 @@ type FruitState = {
 
 const Fruit = (props: Props) => {
   const blankFruit = {
-    currentFruit: { fruitName: "", fruitColor: "", fruitShape: "" },
+    currentFruit: { key: null, fruitName: "", fruitColor: "", fruitShape: "" },
     message: "",
   };
 
@@ -34,10 +35,39 @@ const Fruit = (props: Props) => {
     setFruitState({ ...fruitState, currentFruit: updatedFruit });
   };
 
+  const updateFruit = () => {
+    if (fruitState.currentFruit.key) {
+      const data = {
+        fruitName: fruitState.currentFruit.fruitName,
+        fruitColor: fruitState.currentFruit.fruitColor,
+        fruitShape: fruitState.currentFruit.fruitShape,
+      };
+      FruitDataService.update(fruitState.currentFruit.key, data)
+        .then(() => {
+          setFruitState({
+            ...fruitState,
+            message: "The fruit was updated successfully.",
+          });
+        })
+        .catch((e: Error) => {
+          console.log(e);
+        });
+    }
+  };
+
+  const deleteFruit = () => {
+    if (fruitState.currentFruit.key) {
+      FruitDataService.delete(fruitState.currentFruit.key)
+        .then(props.refreshList())
+        .catch((e: Error) => console.log(e));
+    }
+  };
+
   return (
     <div>
       <h2>Current Fruit:</h2>
       <h2>{fruitState.currentFruit.fruitName.toUpperCase()}</h2>
+      
     </div>
   );
 };

@@ -20,7 +20,7 @@ const FruitsList = () => {
   const { fruits, currentFruit, currentIndex } = fruitsListState;
 
   const handleOnDataChange = useCallback((items: any) => {
-    // onDataChange functionality goes here
+    console.log("Creating fruits array...");
     let fruits = new Array<IFruitData>();
     items.forEach((item: any) => {
       let key = item.key;
@@ -36,8 +36,10 @@ const FruitsList = () => {
   }, []);
 
   useEffect(() => {
+    console.log("Mounting fruits list...");
     FruitDataService.getAll().on("value", handleOnDataChange);
     return () => {
+      console.log("Unmounting fruits list...");
       FruitDataService.getAll().off("value", handleOnDataChange);
     };
   }, [handleOnDataChange]);

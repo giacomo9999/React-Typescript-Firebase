@@ -1,4 +1,4 @@
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import FruitsList from "./components/FruitsList.component";
 import AddFruit from "./components/AddFruit.component";
 
@@ -11,7 +11,7 @@ function App() {
       <div>
         <Switch>
           <Route exact path={["/", "/fruits"]} component={FruitsList} />
-          <Route exact path="/add" component={AddFruit} />Î
+          <Route exact path="/add" component={() => <AddFruit />} />
         </Switch>
       </div>
     </div>

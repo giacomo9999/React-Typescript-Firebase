@@ -1,6 +1,7 @@
 import { useEffect, useCallback, useState } from "react";
+
 import FruitDataService from "../services/fruit.service";
-import Fruit from "./Fruit.component";
+import AddOrEditForm from "./AddOrEditForm";
 import IFruitData from "../types/fruit.type";
 
 type FruitsListState = {
@@ -23,6 +24,7 @@ const FruitsList = () => {
     console.log("Creating fruits array...");
     let fruits = new Array<IFruitData>();
     items.forEach((item: any) => {
+      // console.log("Item: ", item.key, item.val());
       let key = item.key;
       let data = item.val();
       fruits.push({
@@ -84,26 +86,23 @@ const FruitsList = () => {
         <ul>
           {fruits &&
             fruits.map((fruit, index) => (
-              <li
-                className={
-                  "list-group-item " + (index === currentIndex ? "active" : "")
-                }
-                onClick={() => setActiveFruit(fruit, index)}
-                key={index}
-              >
+              <li onClick={() => setActiveFruit(fruit, index)} key={index}>
                 {fruit.fruitName}
               </li>
             ))}
         </ul>
         <button onClick={removeAllFruits}>Remove All Fruits</button>
       </div>
-      <div className="container-inner">
-        {currentFruit ? (
-          <Fruit fruit={currentFruit} refreshList={refreshList} />
-        ) : (
-          <h2>Please Click On A Fruit</h2>
-        )}
-      </div>
+
+      {currentFruit ? (
+        <AddOrEditForm
+          formType={"edit"}
+          fruit={currentFruit}
+          refreshList={refreshList}
+        />
+      ) : (
+        <h2>Please Click On A Fruit</h2>
+      )}
     </div>
   );
 };
